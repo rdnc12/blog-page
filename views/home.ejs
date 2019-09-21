@@ -3,6 +3,6 @@
 <p><%=home%></p>
 <% for(let i of postNew){ %>
     <h1 class="mt-3"><%=i.title%></h1>
-    <p><%=i.posting%></p>
+    <p><%=i.posting.substring(0,100)%> ... <a href="/posts/<%=i.title %>">Read More</a></p>
     <% } %>
  <%- include partials/footer.ejs -%>
