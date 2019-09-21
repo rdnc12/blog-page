@@ -1,5 +1,5 @@
 <%- include partials/header.ejs -%>
-<div class="container">
+<div class="shadow-sm container">
 <h1>Compose</h1>
 
 <form action="/compose" method="post">
@@ -24,6 +24,9 @@
     type="submit"
     name="button"
     class="btn btn-primary btn-lg float-left"
+    data-toggle="tooltip"
+    data-placement="bottom" 
+    title="Publish to Home Page"
   >
     Publish
   </button>
