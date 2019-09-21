@@ -1,0 +1,8 @@
+<%- include partials/header.ejs -%>
+<h1>Home</h1>
+<p><%=home%></p>
+<% for(let i of postNew){ %>
+    <h1><%=i.title%></h1>
+    <p><%=i.posting%></p>
+    <% } %>
+ <%- include partials/footer.ejs -%>
