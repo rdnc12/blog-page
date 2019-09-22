@@ -32,6 +32,9 @@ app.get('/contact', (req, res) => {
 app.get('/compose', (req, res) => {
   res.render('compose');
 });
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
 app.post('/compose', (req, res) => {
   const publishPost = {
@@ -54,6 +57,7 @@ app.get('/posts/:title', (req, res) => {
   });
 
 });
+
 
 
 app.listen(3000, function () {
