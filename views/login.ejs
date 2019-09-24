@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
-<div class="container">   
-<form class="form-signin" action="/" method="POST">
+<div class="container mt-5">   
+<form class="form-signin" action="/login" method="POST">
       <div class="text-center form-group mb-4">
        <img class="mb-4" src="/img/to-do-list.jpg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">ToDo-List User Panel</h1>
@@ -15,15 +15,13 @@
           placeholder="Username"
           required
           autofocus
+          autocomplete="off"
         />
         <label for="inputEmail">Username</label>
       <div class="invalid-feedback">
       Please enter correct information!!!.
     </div>
       </div>
-
-      
-
       <div class="form-label-group">
         <input
           type="password"

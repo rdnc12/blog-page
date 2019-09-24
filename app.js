@@ -9,6 +9,7 @@ const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui 
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 var postArray = [];
+var nameList = [];
 
 const app = express();
 
@@ -17,33 +18,59 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+
 app.get('/', (req, res) => {
   res.render('home', { home: homeStartingContent, postNew: postArray });
 });
+
 
 app.get('/about', (req, res) => {
   res.render('about', { about: aboutContent });
 });
 
+
 app.get('/contact', (req, res) => {
   res.render('contact', { contact: contactContent });
 });
 
+
 app.get('/compose', (req, res) => {
-  res.render('compose');
+  if (nameList.length !== 0) 
+    res.render('compose');
+  else
+    res.status(401).send('<h1>401 Unauthorized</h1><p>Please first login</p>');
 });
+
+
 app.get('/login', (req, res) => {
   res.render('login');
 });
+
+
+app.post('/login', (req, res) => {
+  let userName = req.body.inputEmail;
+  let password = req.body.inputPassword;
+
+  nameList.push(userName);
+
+  if (userName === 'admin' && password === 'admin')
+    res.redirect('/compose');
+  else
+    res.redirect('/login');
+});
+
 
 app.post('/compose', (req, res) => {
   const publishPost = {
     title: req.body.postTitle,
     posting: req.body.postArea
   };
-  postArray.push(publishPost);
-  res.redirect('/');
+    postArray.push(publishPost);
+  nameList = [];
+    res.redirect('/');
+    
 });
+
 
 app.get('/posts/:title', (req, res) => {
 
