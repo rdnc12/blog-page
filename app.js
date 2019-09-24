@@ -20,17 +20,17 @@ app.use(express.static("public"));
 
 
 app.get('/', (req, res) => {
-  res.render('home', { home: homeStartingContent, postNew: postArray });
+  res.render('home', { home: homeStartingContent, postNew: postArray, menuId: "home" });
 });
 
 
 app.get('/about', (req, res) => {
-  res.render('about', { about: aboutContent });
+  res.render('about', { about: aboutContent, menuId: "about" });
 });
 
 
 app.get('/contact', (req, res) => {
-  res.render('contact', { contact: contactContent });
+  res.render('contact', { contact: contactContent, menuId: "contact" });
 });
 
 

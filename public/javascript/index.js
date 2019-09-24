@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    let menuName = $('#menus').val();
+    let menuName =$('meta[name="active-menu"]').attr('content');
     console.log(menuName);
 
     switch (menuName) {
