@@ -6,14 +6,17 @@ $(document).ready(function () {
     console.log(menuName);
 
     switch (menuName) {
-        case 'Home':
+        case 'home':
             $('#home').addClass('active');
             break;
-        case 'About':
+        case 'about':
             $('#about').addClass('active');
             break;
-        case 'Contact':
+        case 'contact':
             $('#contact').addClass('active');
+            break;
+        case 'login':
+            $('#login').addClass('active');
     }
    
 });

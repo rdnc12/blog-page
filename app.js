@@ -43,7 +43,7 @@ app.get('/compose', (req, res) => {
 
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {menuId: "login"});
 });
 
 
@@ -80,7 +80,7 @@ app.get('/posts/:title', (req, res) => {
     var storedTitle = value.title;
 
     if (_.lowerCase(titlePost) === _.lowerCase(storedTitle))
-      res.render('post', { newRender: value });
+      res.render('post', { newRender: value, menuId: 'newpost'  });
   });
 
 });
