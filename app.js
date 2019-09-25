@@ -36,9 +36,9 @@ app.get('/contact', (req, res) => {
 
 app.get('/compose', (req, res) => {
   if (nameList.length !== 0) 
-    res.render('compose');
+    res.render('compose',{ menuId: "compose" });
   else
-    res.status(401).send('<h1>401 Unauthorized</h1><p>Please first login</p>');
+    res.status(401).send('<h1>401 Unauthorized</h1><p>Please first login!!!</p>');
 });
 
 
