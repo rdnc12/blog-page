@@ -21,6 +21,19 @@ $(document).ready(function () {
    
 });
 
+
+//Delete day
+$(document).on('click', '#delete', function () {
+    event.preventDefault();
+    var closeDiv = $(this).closest('div');
+
+    $(this).fadeOut(500, function () {
+        closeDiv.remove();
+    });
+
+
+ });
+
 // $('#search-topics input').keyup(function () {
 //     var searchText = $(this).val();
 
