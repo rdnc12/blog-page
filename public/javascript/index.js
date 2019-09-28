@@ -33,7 +33,7 @@ $(document).on('click', '#delete', function () {
  });
 
 
-
+// Search days
 $('#search-topics > input').keyup(function () {
     var searchText = $(this).val().toLowerCase();
 
@@ -43,3 +43,5 @@ $('#search-topics > input').keyup(function () {
         $('#homeContainer').toggle(showCurrentList);
     });
 });
+
+//
