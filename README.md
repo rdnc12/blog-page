@@ -1,5 +1,5 @@
 # Blog Page
-Node, Express, EJS, jQuery project
+Node, Express, EJS, jQuery, Mongoose project
 
 # /home,/contact,/about,/login,/compose
 
