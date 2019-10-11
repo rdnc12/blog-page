@@ -3,12 +3,13 @@
 <h1 class="mt-3" id="menus">Home</h1>
 <p class="text-justify"><%=home%></p>
 </div>
-<% for(let i of postNew){ %>
+    <%if(postNew.length>0) {%>
+     <% for(let i of postNew) {%>
     <div class="shadow-sm container" id="homeContainer">
-    <h1 class="mt-3"><%=i.title%></h1>
-    <p class="text-justify"><%=i.posting.substring(0,100)%> ... <a href="/posts/<%=i.title %>">Read More</a></p>
+    <h1 class="mt-3"><%=i.header%></h1>
+    <p class="text-justify"><%=i.content%> ... <a href="/posts/<%=i.header %>">Read More</a></p>
     <button class="btn btn-primary" id="delete">Delete</button>
     </div>
-    <% } %>
+    <%}}%>
     
  <%- include partials/footer.ejs -%>

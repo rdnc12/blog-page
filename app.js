@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost:27017/blogDB",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const postsSchema = { header: String, content:String };
-const Post = mongoose.model("Title", postsSchema);
+const Post = mongoose.model("Post", postsSchema);
 const Post1 = new Post({ header: "Welcome", content: "First post has been send!!!" });
 const defaultPost=[Post1];
 
@@ -34,19 +34,41 @@ app.get('/', (req, res) => {
       res.redirect("/");
     }
     else
-      res.render('home', { home: defaultPost[0].content, postNew: postArray, menuId: "home" });
+      res.render('home', { home: defaultPost[0].content,postNew:foundPost, menuId: "home" });
   });
 
 });
 
 
 app.get('/about', (req, res) => {
-  res.render('about', { about: aboutContent, menuId: "about" });
+
+  Post.find({}, (err, foundPost) => {
+    if (foundPost.length === 0) {
+      Post.insertMany(defaultPost, (err) => {
+        if (err) { console.log(err); }
+        else { console.log("success!!!"); }
+      });
+      res.redirect("/");
+    }
+    else
+      res.render('about', { about: defaultPost[0].content, menuId: "about" });
+  });
 });
 
 
 app.get('/contact', (req, res) => {
-  res.render('contact', { contact: contactContent, menuId: "contact" });
+
+  Post.find({}, (err, foundPost) => {
+    if (foundPost.length === 0) {
+      Post.insertMany(defaultPost, (err) => {
+        if (err) { console.log(err); }
+        else { console.log("success!!!"); }
+      });
+      res.redirect("/");
+    }
+    else
+      res.render('contact', { contact: defaultPost[0].content, menuId: "contact" });
+  });
 });
 
 
@@ -77,14 +99,25 @@ app.post('/login', (req, res) => {
 
 
 app.post('/compose', (req, res) => {
-  const publishPost = {
-    title: req.body.postTitle,
-    posting: req.body.postArea
-  };
-  postArray.push(publishPost);
-  nameList = [];
-  res.redirect('/');
+  
+  const newPostTitle = _.capitalize(req.body.postTitle);
+  const newContent = _.capitalize(req.body.postArea);
+  
+Post.findOne({header:newPostTitle, content:newContent},(err,foundPost)=>{
+  if(!err){
+    if(!foundPost){
+      const newPost = new Post({ header: newPostTitle, content: newContent});
+      newPost.save();
 
+        res.render('home', { home: defaultPost[0].content, postNew: newPost, menuId: "home" });
+      
+      //res.redirect("/");
+     
+    }
+  }
+});
+  nameList = [];
+  
 });
 
 
