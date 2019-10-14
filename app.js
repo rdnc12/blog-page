@@ -14,10 +14,10 @@ app.use(express.static("public"));
 mongoose.connect("mongodb+srv://admin-erdinc:erdinc@tsm-8sw91.azure.mongodb.net/blogDB",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
-const postsSchema = { header: String, content:String };
+const postsSchema = { header: String, content: String };
 const Post = mongoose.model("Post", postsSchema);
 const Post1 = new Post({ header: "Welcome", content: "First post has been send!!!" });
-const defaultPost=[Post1];
+const defaultPost = [Post1];
 
 var postArray = [];
 var nameList = [];
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
       res.redirect("/");
     }
     else
-      res.render('home', { home: defaultPost[0].content,postNew:foundPost, menuId: "home" });
+      res.render('home', { home: defaultPost[0].content, postNew: foundPost, menuId: "home" });
   });
 
 });
@@ -99,39 +99,41 @@ app.post('/login', (req, res) => {
 
 
 app.post('/compose', (req, res) => {
-  
+
   const newPostTitle = _.capitalize(req.body.postTitle);
   const newContent = _.capitalize(req.body.postArea);
-  
-Post.findOne({header:newPostTitle, content:newContent},(err,foundPost)=>{
-  if(!err){
-    if(!foundPost){
-      const newPost = new Post({ header: newPostTitle, content: newContent});
-      newPost.save();
 
-        res.render('home', { home: defaultPost[0].content, postNew: newPost, menuId: "home" });
-      
-      // res.redirect("/");
-     
+  Post.findOne({ header: newPostTitle, content: newContent }, (err, foundPost) => {
+    if (!err) {
+      if (!foundPost) {
+        const newPost = new Post({ header: newPostTitle, content: newContent });
+        newPost.save();
+        res.redirect("/");
+      } else res.render('home', { home: defaultPost[0].content, postNew: newPost, menuId: "home" });
     }
-  }
-});
+  });
   nameList = [];
-  
+
 });
 
 
 app.get('/posts/:title', (req, res) => {
 
-  let titlePost = req.params.title;
+  let titlePost = _.capitalize(req.params.title);
 
-  postArray.forEach(function (value) {
-    var storedTitle = value.title;
-
-    if (_.lowerCase(titlePost) === _.lowerCase(storedTitle))
-      res.render('post', { newRender: value, menuId: 'newpost' });
+  Post.findOne({ header: titlePost }, (err, foundPost) => {
+    if (!err) {
+      if (foundPost) {
+          res.render('post', { newRender: foundPost, menuId: 'newpost' });
+      }
+    }
   });
+});
 
+app.post('/delete',(req,res)=>{
+  const IdPost=req.body.postId;
+  
+  Post.findByIdAndRemove(IdPost).then(res.redirect("/"));
 });
 
 app.listen(3000, function () {

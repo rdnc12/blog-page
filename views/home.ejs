@@ -1,12 +1,14 @@
 <%- include partials/header.ejs -%>
-<table class="table">
+<table class="table" id="homeContainer">
     <tbody> 
        <tr>
            <td>  
-                <div class="shadow-sm container" id="homeContainer">
-                    <h3 class="mt-3" id="menus">Home</h3>
-                     <p class="text-justify"><%=home%></p>
-                </div>
+               <form >
+                    <div class="shadow-sm container" id="homeContainer">
+                         <h4 class="mt-3" id="menus">Home</h4>
+                         <p class="text-justify"><%=home%></p>
+                    </div>
+                </form>
             </td>
         </tr> 
         
@@ -14,9 +16,10 @@
      <% for(let i of postNew) {%>
         <tr>
             <td>
-                <div class="shadow-sm container" id="homeContainer">
-                    <form action="/delete" method="post">
-                        <h3 class="mt-3"><%=i.header%></h3>
+                <div class="shadow-sm container" >
+                    <form action="/delete" method="post" >
+                        <input type="hidden" name="postId" value="<%=i._id %>">
+                        <h4 class="mt-3"><%=i.header%></h4>
                         <p class="text-justify"><%=i.content%> ... <a href="/posts/<%=i.header %>">Read More</a></p>
                         <button class="btn btn-primary" id="delete">Delete</button>
                     </form>

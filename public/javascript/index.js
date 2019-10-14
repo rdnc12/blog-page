@@ -18,7 +18,7 @@ $(document).ready(function () {
         case 'login':
             $('#login').addClass('active');
     }
-    
+
     $('.table').after('<div class="pagination justify-content-center" id="nav"></div>');
     var rowsShown = 3;
     var rowsTotal = $('.table tbody tr').length;
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     $('.table tbody tr').hide();
     $('.table tbody tr').slice(0, rowsShown).show();
-    $('#nav').addClass('mb-1');
+    $('#nav').addClass('mb-5 pagefooter');
     $('#nav a:first').addClass('active');
 
     $('#nav a').bind('click', function () {
@@ -59,14 +59,16 @@ $(document).ready(function () {
 //  });
 
 
-// Search days
+// Search header
 $('#search-topics > input').keyup(function () {
     var searchText = $(this).val().toLowerCase();
 
-    $('#homeContainer > h1').each(function () {
+    $('#homeContainer > tbody > tr >td > form > div > h4').each(function () {
+
         var currentLiText = $(this).text().toLowerCase();
         showCurrentList = currentLiText.indexOf(searchText) > -1;
-        $('#homeContainer').toggle(showCurrentList);
+        
+        $('#homeContainer > tbody > tr >td > form > div').toggle(showCurrentList);
     });
 });
 
