@@ -1,15 +1,30 @@
 <%- include partials/header.ejs -%>
-<div class="shadow-sm container" id="homeContainer">
-<h1 class="mt-3" id="menus">Home</h1>
-<p class="text-justify"><%=home%></p>
-</div>
+<table class="table">
+    <tbody> 
+       <tr>
+           <td>  
+                <div class="shadow-sm container" id="homeContainer">
+                    <h3 class="mt-3" id="menus">Home</h3>
+                     <p class="text-justify"><%=home%></p>
+                </div>
+            </td>
+        </tr> 
+        
     <%if(postNew.length>0) {%>
      <% for(let i of postNew) {%>
-    <div class="shadow-sm container" id="homeContainer">
-    <h1 class="mt-3"><%=i.header%></h1>
-    <p class="text-justify"><%=i.content%> ... <a href="/posts/<%=i.header %>">Read More</a></p>
-    <button class="btn btn-primary" id="delete">Delete</button>
-    </div>
-    <%}}%>
+        <tr>
+            <td>
+                <div class="shadow-sm container" id="homeContainer">
+                    <form action="/delete" method="post">
+                        <h3 class="mt-3"><%=i.header%></h3>
+                        <p class="text-justify"><%=i.content%> ... <a href="/posts/<%=i.header %>">Read More</a></p>
+                        <button class="btn btn-primary" id="delete">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
     
+    <%}}%>
+     </tbody>
+</table>
  <%- include partials/footer.ejs -%>

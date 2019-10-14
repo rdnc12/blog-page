@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/blogDB",
+mongoose.connect("mongodb+srv://admin-erdinc:erdinc@tsm-8sw91.azure.mongodb.net/blogDB",
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const postsSchema = { header: String, content:String };
@@ -111,7 +111,7 @@ Post.findOne({header:newPostTitle, content:newContent},(err,foundPost)=>{
 
         res.render('home', { home: defaultPost[0].content, postNew: newPost, menuId: "home" });
       
-      //res.redirect("/");
+      // res.redirect("/");
      
     }
   }
