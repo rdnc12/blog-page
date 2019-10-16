@@ -34,9 +34,9 @@
   color: #fff;
 }
 
-#data tr {
+/* #data tr {
   display: none;
-}
+} */
 .pagefooter {
   position: fixed;
   bottom: 22px;

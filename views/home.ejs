@@ -1,6 +1,6 @@
 <%- include partials/header.ejs -%>
 <table class="table" id="homeContainer">
-    <tbody> 
+    <tbody id="data"> 
        <tr>
            <td>  
                <form >
@@ -21,7 +21,7 @@
                         <input type="hidden" name="postId" value="<%=i._id %>">
                         <h4 class="mt-3"><%=i.header%></h4>
                         <p class="text-justify"><%=i.content%> ... <a href="/posts/<%=i.header %>">Read More</a></p>
-                        <button class="btn btn-primary" id="delete">Delete</button>
+                        <button class="btn btn-primary float-right" id="delete">Delete</button>
                     </form>
                 </div>
             </td>

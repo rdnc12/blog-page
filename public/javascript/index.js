@@ -2,6 +2,8 @@
 
 $(document).ready(function () {
 
+    //active navbar
+
     let menuName = $('meta[name="active-menu"]').attr('content');
     console.log(menuName);
 
@@ -19,6 +21,8 @@ $(document).ready(function () {
             $('#login').addClass('active');
     }
 
+    // pagination
+    const searching = () => {
     $('.table').after('<div class="pagination justify-content-center" id="nav"></div>');
     var rowsShown = 3;
     var rowsTotal = $('.table tbody tr').length;
@@ -28,23 +32,24 @@ $(document).ready(function () {
         var pageNum = i + 1;
         $('#nav').append('<a class="page-link" href="#" rel="' + i + '">' + pageNum + '</a> ');
     }
+    
+        $('.table tbody tr').hide();
+        $('.table tbody tr').slice(0, rowsShown).show();
+        $('#nav').addClass('mb-5 pagefooter');
+        $('#nav a:first').addClass('active');
 
-    $('.table tbody tr').hide();
-    $('.table tbody tr').slice(0, rowsShown).show();
-    $('#nav').addClass('mb-5 pagefooter');
-    $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function () {
 
-    $('#nav a').bind('click', function () {
-
-        $('#nav a').removeClass('active');
-        $(this).addClass('active');
-        var currPage = $(this).attr('rel');
-        var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $('.table tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
-            css('display', 'table-row').animate({ opacity: 1 }, 300);
-    });
-
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('.table tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+    };
+searching();
 });
 
 
@@ -67,9 +72,10 @@ $('#search-topics > input').keyup(function () {
 
         var currentLiText = $(this).text().toLowerCase();
         showCurrentList = currentLiText.indexOf(searchText) > -1;
-        
-        $('#homeContainer > tbody > tr >td > form > div').toggle(showCurrentList);
+        //  $('#homeContainer > tbody > tr').show();
+        // searching();
     });
+    
 });
 
 //

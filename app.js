@@ -19,7 +19,6 @@ const Post = mongoose.model("Post", postsSchema);
 const Post1 = new Post({ header: "Welcome", content: "First post has been send!!!" });
 const defaultPost = [Post1];
 
-var postArray = [];
 var nameList = [];
 
 
@@ -124,18 +123,31 @@ app.get('/posts/:title', (req, res) => {
   Post.findOne({ header: titlePost }, (err, foundPost) => {
     if (!err) {
       if (foundPost) {
-          res.render('post', { newRender: foundPost, menuId: 'newpost' });
+        res.render('post', { newRender: foundPost, menuId: 'newpost' });
       }
     }
   });
 });
 
-app.post('/delete',(req,res)=>{
-  const IdPost=req.body.postId;
-  
+app.post('/delete', (req, res) => {
+  const IdPost = req.body.postId;
+
   Post.findByIdAndRemove(IdPost).then(res.redirect("/"));
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+// app.post('/search', (req, res) => {
+
+//   const searchText = req.body.searchText;
+
+//   Post.find({})
+
+// });
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+app.listen(port, function () {
+  console.log("Server has started.");
 });
